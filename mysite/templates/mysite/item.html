@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+ <head>
+   <title>Web</title>
+   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+     <style>
+     *{
+     margin:0;
+     font-family:Trebuchet MS, sans-serif;
+     }
+     .block1{
+    width: 100%;
+    height: 90px;
+    display: flex;
+    justify-content: space-between;
+    background-color: whitesmoke;
+    -webkit-box-shadow:0 0 5px black;
+}
+
+.head{
+    display: flex;
+
+}
+.icon{
+    float: left;
+    margin-top: 20px;
+    margin-left: 70px;
+    display: inline-block;
+}
+.d36 {
+    width: 10px;
+    height: 10px;
+    margin: 0 0 20px 10px;
+    border: 2px solid royalblue;
+    background: lightskyblue;
+    position: relative;
+    transform: rotate(45deg);
+}
+.d36:before,
+.d36:after {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 30px;
+    border: 2px solid royalblue;
+    transform: rotate(-45deg);
+}
+.d36:before {
+    background: cornflowerblue;
+    border-radius: 0 100% 50% 90%;
+}
+.d36:after {
+    left: 10px;
+    top: -10px;
+    background: lightsteelblue;
+    border-radius: 100% 0  90% 50%;
+}
+#word1{
+    display: inline-block;
+    color: dimgrey;
+    font-family: Candara;
+    margin-top: 20px;
+    margin-left: 30px;
+}
+#box3{
+
+    justify-content: space-between;
+}
+.bar{
+    display: inline-block;
+    text-decoration: none;
+    color: cornflowerblue;
+	margin: 25px 150px 50px 0;
+}
+  .container{
+    display: grid;
+    grid-template-columns: auto auto;
+     grid-template-rows: auto;
+     grid-template-areas:
+    "header header"
+    "main sidebar"
+    "footer footer";
+  background-color: none;
+  padding: 10px;
+  width: 60%;
+  margin: auto;
+
+}
+.title{
+grid-area:header
+width:100%;
+height:50px;
+margin:20px;
+margin-bottom:50px;
+}
+
+.img{
+grid-area:main;
+border:2px solid #D3D3D3;
+}
+.text{
+grid-area:sidebar;
+padding:10px;
+}
+.price{
+color:red;
+font-size:30px;
+margin:10px;
+}
+.btn {
+margin-bottom:20px;
+}
+#foot{
+    padding-top:20px;
+    text-align: center;
+    background-color: dimgrey;
+    color: whitesmoke;
+    padding-bottom:20px;
+    -webkit-box-shadow:0 0 5px black;
+margin-top: auto;
+}
+
+.footer-top {
+  padding: 20px 30px;
+  background: white;
+  font-family: 'Roboto', sans-serif;
+  margin: auto;
+}
+.widget-title {
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #222;
+  font-size: 16px;
+  padding-left: 15px;
+  margin-bottom: 15px;
+  border-left: 2px solid #b99d61;
+}
+.widget-list {
+  padding: 0;
+  list-style: none;
+}
+.widget-list a:before {
+  content: "\2014";
+  margin-right: 14px;
+}
+.widget-list a {
+  text-decoration: none;
+  outline: none;
+  display: block;
+  padding: 6px 0;
+  letter-spacing: 1px;
+  font-weight: 300;
+  color: #444;
+  transition: .3s linear;
+}
+.widget-list a:hover {color: #b99d61;}
+.allfooter{
+	background-color: white;
+	border: 1px solid black;
+	margin: 50px auto 0 auto;
+	display: flex;
+	width: 100%;
+	justify-content: center;
+    padding:0 auto;
+}
+     </style>
+ </head>
+<body>
+   <div class="block1">
+    <div class="head">
+        <div class="icon">
+            <div class="d36"></div>
+        </div>
+        <h1 id="word1">T-lombard</h1>
+    </div>
+        <div id="box3">
+        <nav>
+            <a href="https://www.olx.kz/list/q-%D0%B7%D0%BE%D0%BB%D0%BE%D1%82%D0%BE-%D0%BB%D0%BE%D0%BC%D0%B1%D0%B0%D1%80%D0%B4/" class="bar">Магазин</a>
+            <a href="" class="bar">Адреса</a>
+            <a href="3.html" class="bar">Ломбард</a>
+                         {% url 'login_page' as url_login_page %}
+                {% if user.is_authenticated %}
+                  {% url 'logout_page' as url_logout_page %}
+                    <a class="bar" style="color: red; Font-size:20px">{{user.username}}    </a>
+                    <a href="{{url_logout_page}}" class="bar">Выход</a>
+                {% else %}
+                {% url 'register_page' as url_register_page %}
+                    <a href="{{url_login_page}}" class="bar">Вход</a>
+                    <a href="{{url_register_page}}" class="bar">Регистрация</a>
+                {% endif %}
+        </nav>
+        </div>
+    </div>
+
+
+
+
+
+<div class="container">
+    <div class="title"><h1>{{item.title}}</h1></div>
+    <div class="img"><img class="slider" src="{{item.image}}" width="700px" height="500px"></div>
+    <div class="text">
+        <p>КОД ТОВАРА: {{item.id}}</p><hr>
+        <p class="price">{{item.price}}Тг</p>
+        <button type="button" class="btn btn-primary">Купить</button><hr>
+        <h5>ХАРАКТЕРИСТИКИ ИЗДЕЛИЯ:</h5>
+        <p>Металл: {{item.metall}}</p>
+        <p>Вставки: {{item.vstavka}}</p>
+        <p>Проба: {{item.proba}}</p>
+        <p>Вес изделия: {{item.weight}}</p>
+        <p>Размер: {{item.size}}</p>
+        <p>Стиль: {{item.style}}</p>
+        <hr>
+    </div>
+</div>
+   <div class="allfooter">
+<div class="footer-top">
+	<h3 class="widget-title">Категории</h3>
+  <ul class="widget-list">
+    <li><a href="">Дизайн</a></li>
+    <li><a href="">Фотошоп</a></li>
+    <li><a href="">Типографика</a></li>
+    <li><a href="">Музыка</a></li>
+    <li><a href="">Видео</a></li>
+  </ul>
+</div>
+
+<div class="footer-top">
+	<h3 class="widget-title">Категории</h3>
+  <ul class="widget-list">
+    <li><a href="">О нас</a></li>
+    <li><a href="">Контакты</a></li>
+    <li><a href="">Адреса</a></li>
+    <li><a href="">Музыка</a></li>
+    <li><a href="">Видео</a></li>
+  </ul>
+</div>
+<div class="footer-top"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2906.7759997994485!2d76.9073603157306!3d43.23515588737944!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3883692f0279a0c5%3A0x7970edb08b2ffdce!2z0JjQvdC90L7QstCw0YbQuNC-0L3QvdGL0Lkg0KLQtdGF0L3QuNGH0LXRgdC60LjQuSDQmtC-0LvQu9C10LTQtg!5e0!3m2!1sru!2skz!4v1611130693230!5m2!1sru!2skz" width="500" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe></div>
+</div>
+	<div id="foot">
+        <p id="F"> 7(747)-345-28-08, 7(707)-333-87-87</p>
+        <p id="F1"> T_Lombard@gmail.com</p>
+        <p> Pawnshops of the city of Almaty. 2021 All Rights Reserved &#169;</p>
+    </div>
+</body>
+</html>
